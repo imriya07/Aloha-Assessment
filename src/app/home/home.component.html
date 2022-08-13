@@ -1,0 +1,39 @@
+<div class="row container container-fluid">
+    <div class="col-sm-8">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Enter title" [(ngModel)]="obj.title">
+          </div>
+          <div>
+            <textarea class="form-control"  placeholder="Enter Body" [(ngModel)]="obj.body" rows="5" id="comment" name="text"></textarea>
+          </div>
+    </div>
+    <div class="col-sm-4">
+        <button type="button" class="btn btn-primary btn-block" (click)="submit()" *ngIf="!toggle">Submit</button>
+        <button type="button" class="btn btn-warning btn-block" (click)="update()" *ngIf="toggle">Update</button>
+    </div>
+</div>
+
+<table class="table table-hover" >
+    <thead>
+      <tr>
+        <th>Serial No</th>
+        <th>Title   
+            <input type="text" [(ngModel)]="filter.title"/>
+        </th>
+        <th>Body
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="posts.length">
+      <tr *ngFor="let user of posts | filterValue:filter.title;index as i">
+        <td>{{i + 1}}</td>
+        <td>{{user.title}}</td>
+        <td>{{user.body}}</td>
+        <td>
+            <button type="button" class="btn btn-success" (click)="edit(user.id)">Edit</button>
+            <button type="button" class="btn btn-danger"  (click)="delete(user.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
